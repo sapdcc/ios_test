@@ -63,7 +63,7 @@ static NSString *identifier = @"FileCell";
         [self setTitle:[_folder name]];
         
         currentPage = 1;
-        noOfPages = ceil((double)[[_folder files] count] / (double)DISPLAY_NO_OF_ITEMS);
+        noOfPages = ceil((double)[[self files] count] / (double)DISPLAY_NO_OF_ITEMS);
         
         [self refreshData];
     }
@@ -87,7 +87,7 @@ static NSString *identifier = @"FileCell";
     if ((currentPage * DISPLAY_NO_OF_ITEMS) > [[_folder files] count])
     {
         loc = (currentPage - 1) * DISPLAY_NO_OF_ITEMS;
-        len = [[_folder files] count] - loc;
+        len = [[self files] count] - loc;
         range = NSMakeRange(loc, len);
     }
     else
@@ -98,16 +98,21 @@ static NSString *identifier = @"FileCell";
         }
     
     // Get subarray and sort it
-    _items = [[[[[_folder files] allObjects] subarrayWithRange:range] sortedArrayUsingDescriptors:@[asc]] retain];
+    _items = [[[[self files] subarrayWithRange:range] sortedArrayUsingDescriptors:@[asc]] retain];
     
     // Show range of records shown from the total no. of records
-    _pageLabel.text = [NSString stringWithFormat:@"Showing %i - %i of %i", ++loc, loc+[_items count]-1, [[_folder files] count]];
+    _pageLabel.text = [NSString stringWithFormat:@"Showing %i - %i of %i", ++loc, loc+[_items count]-1, [[self files] count]];
     
     // Reload data
     [_tableView reloadData];
     
     // Scroll to top
     [_tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+}
+
+- (NSArray *)files
+{
+    return [[[_folder files] filteredSetUsingPredicate:[NSPredicate predicateWithFormat:@"self.hidden == 0"]] allObjects];
 }
 
 #pragma mark - Event Handlers
