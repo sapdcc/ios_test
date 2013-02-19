@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[ListViewController tableView:numberOfRowsInSection:]:ListViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "(([_items count] - (currentPage * 20)) &lt;= 20)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[Parser addOrUpdateFoldersFromDictionary:forUser:]:Parser.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "_folder.files">
+            </PersistentString>
+            <PersistentString
+               value = "_user.folders">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
