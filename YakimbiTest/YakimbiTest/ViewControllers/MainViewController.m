@@ -244,6 +244,7 @@ static NSString *identifier = @"FolderCell";
 
 - (void)dealloc
 {
+    [_fetchOperation setDelegate:nil];
     [_fetchOperation cancel];
     SAFE_RELEASE(_fetchOperation);
     SAFE_RELEASE(_user);
